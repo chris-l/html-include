@@ -48,6 +48,8 @@ Or actually, you can just include the script:
 
 (just do one of the two, don't do both)
 
+Do it immediately after the webcomponents polyfill, and before any other scripts. (So it can capture the `DOMContentLoaded` event)
+
 After that you can use it like this:
 
 ```html
@@ -58,7 +60,8 @@ Whatever content `header.html` has, it will replace the actual `html-include` ta
 
 If the file in the `src` can't be read, then it will be replaced by an empty string.
 
-It will load the content using a **sync** `XMLHttpRequest`, so the `DOMContentLoaded` event will see the composed html.
+It will load the content using a `XMLHttpRequest`, and prevent emitting the `DOMContentLoaded` event until all the `html-include` elements (with the src attribute) on the DOM are resolved.
+At that moment, a `DOMContentLoaded` event will be emitted, and it will see the fully composed html.
 
 ## License
 
