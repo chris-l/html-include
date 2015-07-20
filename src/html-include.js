@@ -42,9 +42,13 @@
 
 
   function xhr(that, uri) {
-    var r = new XMLHttpRequest(),
-      str = (/\?/.test(uri) ? '&' : '?') + (new Date().getTime());
-    r.open("GET", uri + str, true);
+    var r = new XMLHttpRequest();
+
+    if (that.preventCache || that.getAttribute('prevent-cache') !== null) {
+      uri += (/\?/.test(uri) ? '&' : '?') + (new Date().getTime());
+    }
+
+    r.open("GET", uri, true);
     r.onreadystatechange = function () {
       var response;
       if (r.readyState !== 4) {
@@ -93,7 +97,7 @@
         xhr(that, val);
       },
       get : function () {
-        return '';
+        return that.getAttribute('src') || '';
       }
     });
   };
