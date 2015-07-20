@@ -3,7 +3,9 @@
 
 **&lt;html-include&gt;** is a very simple Web Component for including the raw content of an HTML file.
 
-Whatever content you load with it, it will replace the `html-include` **outer html**.
+Whatever content you load with it, it will replace the `html-include` **outerHTML**.
+
+This is a vanilla-js component and it has no dependencies.
 
 ## Demo
 
@@ -60,8 +62,15 @@ Whatever content `header.html` has, it will replace the actual `html-include` ta
 
 If the file in the `src` can't be read, then it will be replaced by an empty string.
 
-It will load the content using a `XMLHttpRequest`, and prevent emitting the `DOMContentLoaded` event until all the `html-include` elements (with the src attribute) on the DOM are resolved.
+It will load the content using a `XMLHttpRequest`, and prevent emitting the `DOMContentLoaded` event (and the `window load` event) until all the `html-include` elements (with the src attribute) on the DOM are resolved.
 At that moment, a `DOMContentLoaded` event will be emitted, and it will see the fully composed html.
+
+## Options
+
+Attribute      | Options     | Default      | Description
+---            | ---         | ---          | ---
+`src`          | *string*    | `''`         | Name of the file to be included.
+`prevent-cache`| *boolean*   | false        | Add a random string as query parameter to the `src` file, to prevent cache.
 
 ## License
 
