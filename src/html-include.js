@@ -12,19 +12,31 @@
    * there are no more * html-include elements with a src attribute.
    */
   (function () {
-    var CustomDOMContentLoaded, listener;
+    var CustomDOMContentLoaded = new Event('DOMContentLoaded'),
+      CustomWindowLoad = new Event('load'),
+      windowEmitted = false,
+      windowListener,
+      listener;
 
-    CustomDOMContentLoaded = new Event('DOMContentLoaded');
+    windowListener = function (e) {
+      e.stopImmediatePropagation();
+      windowEmitted = true;
+    };
     listener = function (e) {
       e.stopImmediatePropagation();
       var inter = setInterval(function () {
         if (document.body.querySelectorAll('html-include[src]').length === 0) {
           clearInterval(inter);
           document.removeEventListener('DOMContentLoaded', listener, true);
+          window.removeEventListener('load', windowListener, true);
           document.dispatchEvent(CustomDOMContentLoaded);
+          if (windowEmitted) {
+            window.dispatchEvent(CustomWindowLoad);
+          }
         }
       }, 1);
     };
+    window.addEventListener('load', windowListener, true);
     document.addEventListener('DOMContentLoaded', listener, true);
   }());
 
