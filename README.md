@@ -3,7 +3,7 @@
 
 **&lt;html-include&gt;** is a very simple Web Component for including the raw content of an HTML file.
 
-It's somewhat similar to doing a PHP `include` for a plain html file (looks familiar? `<?php include('header.html');?>`), but on the browser side.
+It's somewhat similar to doing a [PHP include](http://php.net/manual/en/function.include.php) for a plain html file (looks familiar? `<?php include('header.html'); ?>`), but on the browser side.
 
 It looks like this:
 
@@ -11,9 +11,9 @@ It looks like this:
 <html-include src="header.html"></html-include>
 ```
 
-Whatever content you load with it, it will replace the `html-include` **outerHTML**.
+Whatever content you load with it, it will replace the `<html-include>`'s **outerHTML**.
 
-This is a vanilla-js component and it has no dependencies.
+This is a plain JavaScript component and it has no dependencies.
 
 ## Demo
 
@@ -27,7 +27,7 @@ Using &lt;html-include&gt; means it will make an extra request for each file it 
 
 But, if you are not expecting certain files to change, you can configure your server cache control for those files to improve performance and reduce requests.
 
-If it's an option, try to better to use server-side includes. (for static sites, you could use a preprocessor, like jekyll or harpjs)
+If it's an option, try to use server-side includes instead. (For static sites, you could use a preprocessor, like [jekyll](http://jekyllrb.com/) or [harpjs](http://harpjs.com/))
 
 ## Installation
 
