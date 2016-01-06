@@ -1,5 +1,5 @@
-/*jslint browser: true, indent: 2*/
-/*global Event*/
+/*jslint browser: true, indent: 2, evil: true*/
+/*global Event, DOMParser*/
 
 (function (window) {
   'use strict';
@@ -14,6 +14,7 @@
   (function () {
     var CustomDOMContentLoaded = new Event('DOMContentLoaded'),
       CustomWindowLoad = new Event('load'),
+      beforeLoad = new Event('beforeLoad'),
       windowEmitted = false,
       windowListener,
       listener;
@@ -29,6 +30,7 @@
           clearInterval(inter);
           document.removeEventListener('DOMContentLoaded', listener, true);
           window.removeEventListener('load', windowListener, true);
+          window.dispatchEvent(beforeLoad);
           document.dispatchEvent(CustomDOMContentLoaded);
           if (windowEmitted) {
             window.dispatchEvent(CustomWindowLoad);
@@ -50,7 +52,7 @@
 
     r.open("GET", uri, true);
     r.onreadystatechange = function () {
-      var response;
+      var response, parser, doc;
       if (r.readyState !== 4) {
         return;
       }
@@ -63,6 +65,14 @@
         //It is not, save the content.
         that.content = response;
       }
+
+      parser = new DOMParser();
+      doc = parser.parseFromString(response, "text/xml");
+      Array.prototype.forEach.call(doc.querySelectorAll('script'), function (script) {
+        window.addEventListener('beforeLoad', function () {
+          eval.call(null, script.innerHTML);
+        });
+      });
     };
     r.send();
   }
