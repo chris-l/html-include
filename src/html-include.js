@@ -69,8 +69,16 @@
       parser = new DOMParser();
       doc = parser.parseFromString(response, "text/xml");
       Array.prototype.forEach.call(doc.querySelectorAll('script'), function (script) {
+        var src = script.getAttribute('src'), ele;
         window.addEventListener('beforeLoad', function () {
-          eval.call(null, script.innerHTML);
+          if (src) {
+            ele = document.createElement('script');
+            ele.setAttribute('src', src);
+            document.querySelector('head').appendChild(ele);
+          }
+          if (!src) {
+            eval.call(null, script.innerHTML);
+          }
         });
       });
     };
