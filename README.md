@@ -13,7 +13,7 @@ It looks like this:
 
 Whatever content you load with it, it will replace the `<html-include>`'s **outerHTML**.
 
-This is a vanilla-js component and it has no dependencies.
+This is a plain JavaScript component and it has no dependencies.
 
 ## Demo
 
