@@ -1,6 +1,6 @@
 @import url(//fonts.googleapis.com/css?family=Baloo+Chettan+2);
 
-@import url(https://fonts.googleapis.com/css?family=Righteous);
+@import url(https://fonts.googleapis.com/css?family=Overpass);
 
 #content-wrapper {
   font-family: 'Baloo Chettan 2', cursive;
@@ -29,5 +29,5 @@
 }
 
 #page-content li {
-  font-family: 'Righteous';
+  font-family: 'Overpass';
 }
