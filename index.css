@@ -1,0 +1,33 @@
+@import url(//fonts.googleapis.com/css?family=Baloo+Chettan+2);
+
+@import url(https://fonts.googleapis.com/css?family=Righteous);
+
+#content-wrapper {
+  font-family: 'Baloo Chettan 2', cursive;
+  background-color: #FEFEFA;
+  width: 100vw;
+  height: 100vh;
+}
+
+#page-content {
+  width: 75vw;
+  min-width: 450px;
+  border: 1px solid #466D48;
+  border-radius: 20px;
+  moz-border-radius: 20px;
+  -webkit-border-radius: 20px;
+  background-color: #355E3B;
+  padding: 30px;
+  display: block;
+  margin: 0 auto !important;
+  color: white;
+  font-size: 18pt;
+}
+
+#page-content a {
+  color: pink;
+}
+
+#page-content li {
+  font-family: 'Righteous';
+}

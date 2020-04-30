@@ -1,5 +1,5 @@
-/*jslint browser: true, indent: 2, evil: true*/
-/*global Event, DOMParser*/
+/*jslint browser: true, indent: 2*/
+/*global Event*/
 
 (function (window) {
   'use strict';
@@ -14,7 +14,6 @@
   (function () {
     var CustomDOMContentLoaded = new Event('DOMContentLoaded'),
       CustomWindowLoad = new Event('load'),
-      beforeLoad = new Event('beforeLoad'),
       windowEmitted = false,
       windowListener,
       listener;
@@ -30,7 +29,6 @@
           clearInterval(inter);
           document.removeEventListener('DOMContentLoaded', listener, true);
           window.removeEventListener('load', windowListener, true);
-          window.dispatchEvent(beforeLoad);
           document.dispatchEvent(CustomDOMContentLoaded);
           if (windowEmitted) {
             window.dispatchEvent(CustomWindowLoad);
@@ -52,7 +50,7 @@
 
     r.open("GET", uri, true);
     r.onreadystatechange = function () {
-      var response, parser, doc;
+      var response;
       if (r.readyState !== 4) {
         return;
       }
@@ -65,22 +63,6 @@
         //It is not, save the content.
         that.content = response;
       }
-
-      parser = new DOMParser();
-      doc = parser.parseFromString(response, "text/xml");
-      Array.prototype.forEach.call(doc.querySelectorAll('script'), function (script) {
-        var src = script.getAttribute('src'), ele;
-        window.addEventListener('beforeLoad', function () {
-          if (src) {
-            ele = document.createElement('script');
-            ele.setAttribute('src', src);
-            document.querySelector('head').appendChild(ele);
-          }
-          if (!src) {
-            eval.call(null, script.innerHTML);
-          }
-        });
-      });
     };
     r.send();
   }

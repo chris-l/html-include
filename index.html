@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>&lt;html-include&gt; demo</title>
+    <link rel="stylesheet" type="text/css" href="index.css">
+    <title>Handouts</title>
     <!-- Conditionally load WC polyfills -->
     <!-- Thanks to https://github.com/geelen/x-gif for the snippet -->
     <script>if (!('registerElement' in document
@@ -15,30 +15,20 @@
       }</script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
     <script src="src/html-include.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        document.querySelector('pre').innerHTML = document.body.innerHTML
-          .replace(/&/g, "&amp;")
-          .replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;")
-          .replace(/"/g, "&quot;")
-          .replace(/'/g, "&#039;");
-      });
-    </script>
   </head>
   <body>
-    <html-include src="header.html"></html-include>
-    <div class="container">
-      <h1>&lt;html-include&gt;</h1>
-      <p>This is how the DOM looks like at the <strong>DOMContentLoaded</strong> event (before inserting the content of &lt;pre&gt;).<br>Compare it against the raw HTML source.</p>
-      <pre></pre>
-    </div>
-    <html-include src="footer.html"></html-include>
     <div id="content-wrapper">
+    <html-include src="header.html"></html-include>
+    <br /><br />
     <div id="page-content">
       <h1>Handouts!</h1>
       So, did you come looking for my handouts? You're at the right place. Most of these handouts are intended for the AIME, so for those of you looking to make the USA(J)MO in the USA or your national olympiad in your country, here are some great resources to get started with:
+      <br />
+      <ul>
+        <li>Polynomials in the AIME (<a href="Polynomials_in_the_AIME.pdf">pdf</a>)<br/>A complete guide on how to use polynomials on the AIME. Includes (almost) every polynomial problem on the AIME and also problems from other sources (such as RMO and HMMT).</li>
+      </ul>
     </div>
+    <html-include src="footer.html"></html-include>
   </div>
   </body>
 </html>
